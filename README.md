@@ -186,6 +186,19 @@ https://support.anynines.com/hc/en-us/community/posts/234548468-How-to-deploy-yo
 
 39.
     for install imagemagick
+    sudo apt-get update
     sudo apt-get install imagemagick --fix-missing
+    
+    
+    
+40.
+    gem 'paperclip'
+    gem 'aws-sdk'
+    gem 'letter_opener_web'
+    
+    
+    https://rubythursday.com/episodes/ruby-snack-27-upgrade-paperclip-and-aws-sdk-in-prep-for-rails-5
 
 
+41. changes in config/environments/development.rb and production.rb
+    so in routes.rb

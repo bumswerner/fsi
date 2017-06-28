@@ -8,9 +8,15 @@ end
  gem 'pg'
  
  # add this gems for works with images in production
- gem 'carrierwave'
+# gem 'carrierwave'
  gem 'mini_magick'
  gem 'fog'
+ 
+  gem 'paperclip'
+    gem 'aws-sdk'
+    gem 'letter_opener_web'
+    
+# gem 'rmagick', '~> 2.16'
 
 
  # Use SCSS for stylesheets
