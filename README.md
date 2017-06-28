@@ -124,6 +124,68 @@ https://support.anynines.com/hc/en-us/community/posts/234548468-How-to-deploy-yo
     gem 'carrierwave'
     gem 'mini_magick'
     gem 'fog'
+    bundle install --without production
+    
+36. rails generate scaffold Image name:string picture:string user:references
 
+      invoke  active_record
+      create    db/migrate/20170628161745_create_images.rb
+      create    app/models/image.rb
+      invoke    test_unit
+      create      test/models/image_test.rb
+      create      test/fixtures/images.yml
+      invoke  resource_route
+       route    resources :images
+      invoke  scaffold_controller
+      create    app/controllers/images_controller.rb
+      invoke    erb
+      create      app/views/images
+      create      app/views/images/index.html.erb
+      create      app/views/images/edit.html.erb
+      create      app/views/images/show.html.erb
+      create      app/views/images/new.html.erb
+      create      app/views/images/_form.html.erb
+      invoke    test_unit
+      create      test/controllers/images_controller_test.rb
+      invoke    helper
+      create      app/helpers/images_helper.rb
+      invoke      test_unit
+      invoke    jbuilder
+      create      app/views/images/index.json.jbuilder
+      create      app/views/images/show.json.jbuilder
+      create      app/views/images/_image.json.jbuilder
+      invoke  test_unit
+      create    test/system/images_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/images.coffee
+      invoke    scss
+      create      app/assets/stylesheets/images.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.scss
+      
+      
+      rails g bootstrap:themed Images
+      then 5 times Y
+      
+      update models/user.rb wuth has_many :images
+      
+      
+      
+37. Generate a uploader
+    rails generate uploader Picture
+    added this line to models/images.rb
+    --> mount_uploader :picture, PictureUploader
+
+38. update views/images/_form.htmlerb
+    <%= form_for @image, :html => { multipart: true, :class => "form-horizontal image" } do |f| %>
+    change
+    <%= f.text_field :picture, :class => 'form-control' %> 
+     to
+    <%= f.file_field :picture, accept: 'image/jpeg, image/gif, image/png', :class => 'form-control' %>
+
+39.
+    for install imagemagick
+    sudo apt-get install imagemagick --fix-missing
 
 
