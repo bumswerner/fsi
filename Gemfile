@@ -4,8 +4,13 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
+ # for postgresql in anynines
  gem 'pg'
+ 
+ # add this gems for works with images in production
+ gem 'carrierwave'
+ gem 'mini_magick'
+ gem 'fog'
 
 
  # Use SCSS for stylesheets

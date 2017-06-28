@@ -117,5 +117,13 @@
       
 https://support.anynines.com/hc/en-us/community/posts/234548468-How-to-deploy-your-apps-on-anynines
 
+35. Amazon S3 Bucket
+
+    add this gems to your gems file
+    # add this gems for works with images in production
+    gem 'carrierwave'
+    gem 'mini_magick'
+    gem 'fog'
+
 
 
