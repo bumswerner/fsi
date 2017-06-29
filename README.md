@@ -202,3 +202,9 @@ https://support.anynines.com/hc/en-us/community/posts/234548468-How-to-deploy-yo
 
 41. changes in config/environments/development.rb and production.rb
     so in routes.rb
+
+
+
+
+manifest.yml.example
+manifest.yml
