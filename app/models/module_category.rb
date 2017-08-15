@@ -1,2 +1,0 @@
-class ModuleCategory < ApplicationRecord
-end
