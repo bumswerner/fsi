@@ -265,42 +265,43 @@ rake db:migrate
 rails g bootstrap:themed Courses
 
 class Course < ActiveRecord::Base
-  belongs_to: faculty
+  belongs_to :faculty
   has_many :assoziations
-  has_many :modulecategories, :through => :assoziations
-  has_many :modules, :through => :assoziations
+  has_many :lecturecategories, :through => :assoziations
+  has_many :lectures, :through => :assoziations
 end
 
 
-++++ identity ++++ ModuleCategory +++++++++++++
-rails generate scaffold ModuleCategory name:string description:text 
+++++ identity ++++ Category +++++++++++++
+rails generate scaffold Category name:string description:text 
 rake db:migrate
-rails g bootstrap:themed ModuleCategories
+rails g bootstrap:themed Categories
 
-class ModuleCategory < ActiveRecord::Base
+class Category < ActiveRecord::Base
   has_many :assoziations
-  has_many :modulecategories, :through => :assoziations
+  has_many :lectures, :through => :assoziations
   has_many :courses, :through => :assoziations
 end
 
 
-++++ identity +++++ Module ++++++++++++++
-rails generate scaffold Module name:string description:text 
+++++ identity +++++ Lecture ++++++++++++++
+rails generate scaffold Lecture name:string description:text 
 rake db:migrate
-rails g bootstrap:themed Modules
+rails g bootstrap:themed Lectures
 
-class Module < ActiveRecord::Base
+class Lecture < ActiveRecord::Base
   has_many :assoziations
-  has_many :modulecategories, :through => :assoziations
+  has_many :categories, :through => :assoziations
   has_many :courses, :through => :assoziations
 end
   
 +++ identity +++++ Assoziation +++++++++
-rails generate scaffold Assoziation modulecategories:references course:references module:references
+rails generate scaffold Assoziation category:references course:references lecture:references
 rake db:migrate
+rails g bootstrap:themed Assoziations
 
 class Assoziation < ActiveRecord::Base
   belongs_to :course
-  belongs_to :modulecategory
-  belongs_to :module
+  belongs_to :category
+  belongs_to :lecture
 end

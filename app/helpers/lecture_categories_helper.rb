@@ -1,0 +1,2 @@
+module LectureCategoriesHelper
+end
