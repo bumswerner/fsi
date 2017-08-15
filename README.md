@@ -255,7 +255,52 @@ rails generate scaffold Faculty name:string symbol:string description:text
 rake db:migrate
 rails g bootstrap:themed Faculties
 
+class Faculty < ActiveRecord::Base
+  has_many :course
+end
+ 
 ++++ identity ++++ Course ++++++++++++++++
-rails generate scaffold Course name:string symbol:string description:text faculty:references
+rails generate scaffold Course name:string symbol:string description:text faculty:references 
 rake db:migrate
 rails g bootstrap:themed Courses
+
+class Course < ActiveRecord::Base
+  belongs_to: faculty
+  has_many :assoziations
+  has_many :modulecategories, :through => :assoziations
+  has_many :modules, :through => :assoziations
+end
+
+
+++++ identity ++++ ModuleCategory +++++++++++++
+rails generate scaffold ModuleCategory name:string description:text 
+rake db:migrate
+rails g bootstrap:themed ModuleCategories
+
+class ModuleCategory < ActiveRecord::Base
+  has_many :assoziations
+  has_many :modulecategories, :through => :assoziations
+  has_many :courses, :through => :assoziations
+end
+
+
+++++ identity +++++ Module ++++++++++++++
+rails generate scaffold Module name:string description:text 
+rake db:migrate
+rails g bootstrap:themed Modules
+
+class Module < ActiveRecord::Base
+  has_many :assoziations
+  has_many :modulecategories, :through => :assoziations
+  has_many :courses, :through => :assoziations
+end
+  
++++ identity +++++ Assoziation +++++++++
+rails generate scaffold Assoziation modulecategories:references course:references module:references
+rake db:migrate
+
+class Assoziation < ActiveRecord::Base
+  belongs_to :course
+  belongs_to :modulecategory
+  belongs_to :module
+end
