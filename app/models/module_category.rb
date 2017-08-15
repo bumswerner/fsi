@@ -1,0 +1,2 @@
+class ModuleCategory < ApplicationRecord
+end
