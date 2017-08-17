@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :coursetypes
   resources :courses
   resources :lecture_categories
   resources :faculties

@@ -288,7 +288,7 @@ rake db:migrate
 rails g bootstrap:themed Courses
 
 class Course < ActiveRecord::Base
-  has_one :coursetype
+  belongs_to :coursetype
   belongs_to :faculty
   has_many :assoziations
   has_many :categories, :through => :assoziations
@@ -300,7 +300,7 @@ end
 ********************************************************************************
 rails generate scaffold Coursetype name:string symbol:string description:text
 rake db:migrate
-rails g bootstrap:themed Coursetype
+rails g bootstrap:themed Coursetypes
 
 class Coursetype < ActiveRecord::Base
   has_many :courses
