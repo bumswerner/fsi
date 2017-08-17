@@ -386,6 +386,7 @@ class Material < ActiveRecord::Base
   belongs_to :section
 end
 
+ change_column(:materials, :id, :bigint)
 
 ********************************************************************************
 ++++ identity +++++ Profile +++++++++
