@@ -352,13 +352,13 @@ end
 ++++ identity +++++ Connection +++++++++
 ********************************************************************************
 rails generate scaffold Connection name:string
-               lecture:references material:references
+               lecture:references section:references
 rake db:migrate
 rails g bootstrap:themed Connections
 
 class Connection < ActiveRecord::Base
   belongs_to :lecture
-  belongs_to :material
+  belongs_to :section
 end
 
 ********************************************************************************
