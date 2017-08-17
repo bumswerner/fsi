@@ -354,7 +354,7 @@ end
 rails generate scaffold Connection name:string
                lecture:references material:references
 rake db:migrate
-rails g bootstrap:themed Connection
+rails g bootstrap:themed Connections
 
 class Connection < ActiveRecord::Base
   belongs_to :lecture
