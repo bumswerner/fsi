@@ -146,8 +146,8 @@ new cli for heroku
 
 wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
-
-
+???????
+ bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --jobs=4 --retry=4 --deployment
 
 
 for cf
