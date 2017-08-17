@@ -247,33 +247,69 @@ FactoryGirl.define do
 end
 
 
+********************************************************************************
+ Tables of FSI and associations
+********************************************************************************
+
+
+    :binary
+    :boolean
+    :date
+    :datetime
+    :decimal
+    :float
+    :integer
+    :bigint
+    :primary_key
+    :references
+    :string
+    :text
+    :time
+    :timestamp
 
 
 ********************************************************************************
 ++++ identity ++++ Faculty +++++++++++++++
+********************************************************************************
 rails generate scaffold Faculty name:string symbol:string description:text
 rake db:migrate
 rails g bootstrap:themed Faculties
 
 class Faculty < ActiveRecord::Base
-  has_many :course
+  has_many :courses
 end
  
+********************************************************************************
 ++++ identity ++++ Course ++++++++++++++++
-rails generate scaffold Course name:string symbol:string description:text faculty:references 
+********************************************************************************
+rails generate scaffold Course name:string symbol:string description:text 
+                               faculty:references coursetype:references 
 rake db:migrate
 rails g bootstrap:themed Courses
 
 class Course < ActiveRecord::Base
+  has_one :coursetype
   belongs_to :faculty
   has_many :assoziations
-  has_many :lecturecategories, :through => :assoziations
+  has_many :categories, :through => :assoziations
   has_many :lectures, :through => :assoziations
 end
 
+********************************************************************************
+++++ identity ++++ Coursetype +++++++++++++++
+********************************************************************************
+rails generate scaffold Coursetype name:string symbol:string description:text
+rake db:migrate
+rails g bootstrap:themed Coursetype
 
+class Coursetype < ActiveRecord::Base
+  has_many :courses
+end
+
+********************************************************************************
 ++++ identity ++++ Category +++++++++++++
-rails generate scaffold Category name:string description:text 
+********************************************************************************
+rails generate scaffold Category name:string symbol:string description:text 
 rake db:migrate
 rails g bootstrap:themed Categories
 
@@ -283,9 +319,10 @@ class Category < ActiveRecord::Base
   has_many :courses, :through => :assoziations
 end
 
-
+********************************************************************************
 ++++ identity +++++ Lecture ++++++++++++++
-rails generate scaffold Lecture name:string description:text 
+********************************************************************************
+rails generate scaffold Lecture name:string symbol:string description:text 
 rake db:migrate
 rails g bootstrap:themed Lectures
 
@@ -293,10 +330,15 @@ class Lecture < ActiveRecord::Base
   has_many :assoziations
   has_many :categories, :through => :assoziations
   has_many :courses, :through => :assoziations
+  has_many :connections
+  has_many :materials, :through => :connections
 end
   
-+++ identity +++++ Assoziation +++++++++
-rails generate scaffold Assoziation category:references course:references lecture:references
+********************************************************************************
+++++ identity +++++ Assoziation +++++++++
+********************************************************************************
+rails generate scaffold Assoziation code:string instructor:string
+               category:references course:references lecture:references
 rake db:migrate
 rails g bootstrap:themed Assoziations
 
@@ -305,3 +347,54 @@ class Assoziation < ActiveRecord::Base
   belongs_to :category
   belongs_to :lecture
 end
+
+********************************************************************************
+++++ identity +++++ Connection +++++++++
+********************************************************************************
+rails generate scaffold Connection name:string
+               lecture:references material:references
+rake db:migrate
+rails g bootstrap:themed Connection
+
+class Connection < ActiveRecord::Base
+  belongs_to :lecture
+  belongs_to :material
+end
+
+********************************************************************************
+++++ identity +++++ Section +++++++++
+********************************************************************************
+rails generate scaffold Section name:string discription:text
+rake db:migrate
+rails g bootstrap:themed Sections
+
+class Section < ActiveRecord::Base
+  has_many :materials
+  has_many :connections
+  has_many :lectures, :through => :connections
+end
+
+********************************************************************************
+++++ identity +++++ Material +++++++++
+********************************************************************************
+rails generate scaffold Material name:string discription:text data:attachment
+                                 section:references
+rake db:migrate
+rails g bootstrap:themed Materials
+
+class Material < ActiveRecord::Base
+  belongs_to :section
+end
+
+
+********************************************************************************
+++++ identity +++++ Profile +++++++++
+********************************************************************************
+rails generate scaffold Profile nickname:string avatar:attachment user:references
+rake db:migrate
+rails g bootstrap:themed Profiles
+
+class Profile < ActiveRecord::Base
+  belongs_to :user
+end
+  

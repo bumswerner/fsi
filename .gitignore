@@ -23,5 +23,7 @@
 .byebug_history
 manifest.yml.example
 manifest.yml
+info.txt
+
 /public/system/images/pictures
 l
